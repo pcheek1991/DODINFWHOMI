@@ -17,6 +17,11 @@ namespace Coreo.Optics
                 normalizedAxis += 180.0;
             }
 
+            if (normalizedAxis >= 180.0)
+            {
+                normalizedAxis = Math.BitDecrement(180.0);
+            }
+
             return normalizedAxis == 0.0 ? 0.0 : normalizedAxis;
         }
 

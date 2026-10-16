@@ -133,6 +133,7 @@ function Invoke-SelfTest {
         [pscustomobject]@{ Input = -360.0; Expected = 0.0 }
         [pscustomobject]@{ Input = -181.0; Expected = 179.0 }
         [pscustomobject]@{ Input = -180.0; Expected = 0.0 }
+        [pscustomobject]@{ Input = -[double]::Epsilon; Expected = [Math]::BitDecrement(180.0) }
         [pscustomobject]@{ Input = -45.0; Expected = 135.0 }
         [pscustomobject]@{ Input = 0.0; Expected = 0.0 }
         [pscustomobject]@{ Input = 180.0; Expected = 0.0 }
@@ -148,6 +149,11 @@ function Invoke-SelfTest {
 
         if ($normalizedAxis -lt 0.0 -or $normalizedAxis -ge 180.0) {
             throw "Normalized axis is outside [0, 180): $normalizedAxis."
+        }
+
+        if ($axisCase.Input -eq -[double]::Epsilon -and
+            $normalizedAxis -ne [Math]::BitDecrement(180.0)) {
+            throw "The smallest negative axis must normalize to the greatest representable value below 180: $normalizedAxis."
         }
     }
 

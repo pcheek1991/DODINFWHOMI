@@ -50,6 +50,10 @@ pwsh -NoLogo -NoProfile -File .\Invoke-Coreo.ps1 -Mode StoreAudit
 
 It opens the standard `CurrentUser` and `LocalMachine` stores with `X509Store.Open(OpenFlags.ReadOnly)` and reports only store location, store name, and certificate count. It does not export certificates or change trust. The profile, self-test, and test script do not inspect certificate stores. The audit mode is not part of TAMP processing and is not run by these tests.
 
+## CI
+
+The workflow downloads the official PowerShell 7.6.7 Windows x64 ZIP, verifies its pinned SHA-256 against the release checksum and GitHub asset digest, then runs the focused tests with that runtime. It does not run `StoreAudit`.
+
 ## Scope and limitations
 
 This component is educational software, not medical advice or a clinically validated lens prescription tool. It makes no DoD certification, endorsement, or compliance claim. It does not contact TAMP endpoints, perform TAMP processing, write files, or modify certificate stores.
