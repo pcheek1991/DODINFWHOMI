@@ -6,6 +6,8 @@ on:
       - 'components/coreo-optics/v1.0/**'
       - '.github/workflows/coreo-optics.yml'
   push:
+    branches:
+      - main
     paths:
       - 'components/coreo-optics/v1.0/**'
       - '.github/workflows/coreo-optics.yml'
@@ -17,7 +19,7 @@ jobs:
   test:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0, Node 24
 
       - name: Download and verify PowerShell 7.6.7
         shell: pwsh
